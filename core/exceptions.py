@@ -26,7 +26,7 @@ class InvalidInstructionErorr(CPUBaseError):
     # operand prefix가 0x, R 아닐 때
 class InvalidOperandError(CPUBaseError):
     def __init__(self, operand: str, pc: int = -1):
-        super().__init__(f"Invalid operand format: '{operand}'", pc):
+        super().__init__(f"Invalid operand format: '{operand}'", pc)
         self.operand = operand
 
     # register번호 our of range
