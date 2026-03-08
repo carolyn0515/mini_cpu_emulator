@@ -16,7 +16,7 @@ class UnknownOpcodeError(CPUBaseError):
         self.opcode = opcode
 
     # 명령어 형식 위반
-class InvalidInstructionErorr(CPUBaseError):
+class InvalidInstructionError(CPUBaseError):
     def __init__(self, reason: str, raw: str = "", pc: int = -1):
         super().__init__(f"Invalid instruction ({reason}): '{raw}'", pc)
         self.raw = raw
