@@ -1,0 +1,1 @@
+# ISA 명세 / operand 개수 / 규칙

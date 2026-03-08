@@ -1,0 +1,1 @@
+# CPU state snapshot / dump 형식

@@ -1,0 +1,1 @@
+# CPU 본체: run loop, fetch/decode/execute orchestration

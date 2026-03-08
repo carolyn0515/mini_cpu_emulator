@@ -1,0 +1,1 @@
+# immediate/register operand 해석
