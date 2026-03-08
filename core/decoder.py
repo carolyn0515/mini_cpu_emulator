@@ -17,6 +17,7 @@ def decode(raw: str, line_no: int = -1) -> Instruction:
     op1 = tokens[1] if len(tokens) > 1 else None
     op2 = tokens[2] if len(tokens) > 2 else None
 
+    # ISA 명세 검증
     validate_tokens(opcode, op1, op2, pc=line_no)
 
     return Instruction(
