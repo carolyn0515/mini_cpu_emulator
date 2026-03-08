@@ -28,7 +28,7 @@ mini_cpu_emulator/
 │   ├── state.py                    # CPU state snapshot / dump 형식
 │   └── exceptions.py               # 사용자 정의 예외
 │
-├── io/
+├── ioutils/
 │   ├── __init__.py
 │   ├── loader.py                   # input.txt -> instruction memory 적재
 │   ├── parser.py                   # 주석/빈줄 정리 등 전처리
@@ -104,3 +104,24 @@ exceptions → opcodes → spec → instruction
 | **main** | Entry | Entry point of the application. Initializes components, loads programs, and starts CPU execution. |
 
 ---
+
+
+
+| 파일 | 한 줄 요약 |
+|------|-----------|
+| `core/exceptions.py` | 에뮬레이터 전용 예외 클래스 계층 — `CPUBaseError`를 루트로 모든 예외가 여기서 정의됨 |
+| `isa/opcodes.py` | opcode 문자열 상수 (`'+'`, `'M'`, `'J'` 등) 를 이름으로 관리 — 코드 전체에서 리터럴 직접 쓰지 않게 해줌 |
+| `isa/spec.py` | 각 opcode가 operand 몇 개 필요한지, op1이 레지스터여야 하는지 등 ISA 규칙을 데이터로 선언 |
+| `core/instruction.py` | 파싱 완료된 명령어 하나를 담는 불변 데이터 구조 (`opcode`, `op1`, `op2`, `raw`) |
+| `core/operands.py` | operand 토큰(`0xA`, `R3`)을 실제 정수값으로 변환 — Addressing Mode 구현체 |
+| `core/decoder.py` | raw 문자열 한 줄을 받아 `Instruction` 객체로 만드는 Decode 단계 |
+| `isa/validator.py` | `decode()` 내부에서 호출 — 토큰이 ISA spec을 위반하는지 검사하고 위반 시 예외 raise |
+| `core/registers.py` | R0~R9 레지스터 파일 — `read()` / `write()` / `snapshot()` 제공 |
+| `core/memory.py` | `Instruction` 리스트를 보관하는 Instruction Memory — `fetch(pc)`로 접근 |
+| `core/state.py` | 한 사이클 후의 PC + 레지스터 전체를 찍은 불변 스냅샷 — tracer가 기록에 씀 |
+| `core/executor.py` | opcode별 핸들러 딕셔너리 — 실제 연산 수행하고 `next_pc` 반환 |
+| `core/cpu.py` | Fetch → Decode(완료) → Execute → PC update 루프를 돌리는 CPU 본체 |
+| `ioutils/loader.py` | 파일 열기 → parser 전처리 → decoder 파싱 → memory 적재 순서 총괄 |
+| `ioutils/parser.py` | 파일에서 읽은 raw 줄에서 빈 줄·주석 제거해서 파싱 가능한 줄만 추려냄 |
+| `ioutils/tracer.py` | 실행 로그 콘솔 출력 + `CPUState` 히스토리 기록 + trace 파일 저장 |
+| `main.py` | CLI 인자 파싱 → Tracer·CPU 생성 → load → run 순서로 묶는 진입점 |
