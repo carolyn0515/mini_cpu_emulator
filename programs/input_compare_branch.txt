@@ -1,0 +1,11 @@
+# input_compare_branch.txt
+# C(Compare) + B(Branch) 테스트
+# if R1 < R2: R3 = 1  else: R3 = 0
+
+M R1 0x3       # line 0: R1 = 3
+M R2 0x5       # line 1: R2 = 5
+C R1 R2        # line 2: R0 = (3 < 5) = 1
+B 0x5 R0       # line 3: R0==1이므로 line 5로 분기
+M R3 0x0       # line 4: else branch (실행 안 됨)
+M R3 0x1       # line 5: then branch → R3 = 1
+H R0 R0        # line 6: HALT

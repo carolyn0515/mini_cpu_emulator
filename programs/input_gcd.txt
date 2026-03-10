@@ -1,0 +1,28 @@
+# input_gcd.txt
+# GCD(12, 8) 계산 — 유클리드 호제법
+# % 연산 없이 뺄셈 루프로 mod 구현
+# 예상 결과: R1 = 4
+
+# ── 초기값 설정 ──────────────────────────────────────
+M R1 0xC       # line 0 : R1 = 12  (a)
+M R2 0x8       # line 1 : R2 = 8   (b)
+
+# ── MAIN LOOP: b == 0이면 종료 ───────────────────────
+C R2 0x1       # line 2 : R0 = (R2 < 1)?  b==0이면 R0=1
+B 0xD R0       # line 3 : R0==1이면 line13(H)로 분기
+
+# ── MOD LOOP: R3 = a mod b ───────────────────────────
+M R3 R1        # line 4 : R3 = a  (mod 계산용 임시)
+C R3 R2        # line 5 : R0 = (R3 < R2)?  a < b이면 R0=1
+B 0xA R0       # line 6 : a < b이면 mod 완료 → line10(swap)
+- R3 R2        # line 7 : R0 = R3 - R2
+M R3 R0        # line 8 : R3 = R3 - R2  (a -= b)
+J 0x5 R0       # line 9 : line5로 점프  (mod loop 반복)
+
+# ── SWAP: a = b,  b = a mod b ───────────────────────
+M R1 R2        # line 10: a = b
+M R2 R3        # line 11: b = a mod b  (R3에 저장된 나머지)
+J 0x2 R0       # line 12: main loop으로 점프
+
+# ── HALT: R1 = GCD ──────────────────────────────────
+H R0 R0        # line 13: HALT. 결과 = R1 = 4

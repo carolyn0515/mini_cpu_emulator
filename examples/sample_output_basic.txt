@@ -1,0 +1,9 @@
+R0: 5 = 3+2
+  TRACE: cycle=   1  PC=1     instr='+ 0x3 0x2'  regs=[R0=5]
+R0: -1 = 1-2
+  TRACE: cycle=   2  PC=2     instr='- 0x1 0x2'  regs=[R0=-1]
+R2: 3
+  TRACE: cycle=   3  PC=3     instr='M R2 0x3'  regs=[R0=-1, R2=3]
+R0: 2 = -1+3
+  TRACE: cycle=   4  PC=4     instr='+ R0 R2'  regs=[R0=2, R2=3]
+HALT

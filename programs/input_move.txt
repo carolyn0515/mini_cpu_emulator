@@ -1,0 +1,9 @@
+# input_move.txt
+# M(Move) 명령어 테스트: 레지스터 간 복사, 즉시값 로드
+
+M R1 0xA       # R1 = 10
+M R2 0x5       # R2 = 5
+M R3 R1        # R3 = R1 = 10
++ R1 R2        # R0 = 10 + 5 = 15
+M R4 R0        # R4 = 15
+H R0 R0

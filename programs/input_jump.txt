@@ -1,0 +1,10 @@
+# input_jump.txt
+# J(Jump) 명령어 테스트
+# line 0,1 실행 후 line 4로 점프 → line 2,3 건너뜀
+
+M R1 0x1       # line 0: R1 = 1
+J 0x4 R0       # line 1: jump to line 4 (line 2,3 스킵)
+M R1 0xFF      # line 2: 실행되면 안 됨 (R1=255로 바뀌면 실패)
+M R2 0xFF      # line 3: 실행되면 안 됨
++ 0x2 0x3      # line 4: R0 = 2 + 3 = 5
+H R0 R0        # line 5: HALT

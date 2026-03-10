@@ -1,0 +1,8 @@
+# input_invalid_div_zero.txt
+# Exception 처리 테스트: Division by zero
+# 예상 출력: [EXCEPTION] Division by zero [PC=1]
+
+M R1 0x5       # line 0: R1 = 5
+/ R1 0x0       # line 1: 5 / 0 → DivisionByZeroError
+M R2 0x1       # line 2: 실행되면 안 됨
+H R0 R0

@@ -6,7 +6,7 @@
 from dataclasses import dataclass
 
 @dataclass(frozen=True)
-class Insruction:
+class Instruction:
     opcode: str
     op1: str | None
     op2: str | None

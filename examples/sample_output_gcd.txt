@@ -1,0 +1,71 @@
+R1: 12
+  TRACE: cycle=   1  PC=1     instr='M R1 0xC'  regs=[R1=12]
+R2: 8
+  TRACE: cycle=   2  PC=2     instr='M R2 0x8'  regs=[R1=12, R2=8]
+CMP 8 vs 1 → R0: 0
+  TRACE: cycle=   3  PC=3     instr='C R2 0x1'  regs=[R1=12, R2=8]
+Branch not taken
+  TRACE: cycle=   4  PC=4     instr='B 0xD R0'  regs=[R1=12, R2=8]
+R3: 12
+  TRACE: cycle=   5  PC=5     instr='M R3 R1'  regs=[R1=12, R2=8, R3=12]
+CMP 12 vs 8 → R0: 0
+  TRACE: cycle=   6  PC=6     instr='C R3 R2'  regs=[R1=12, R2=8, R3=12]
+Branch not taken
+  TRACE: cycle=   7  PC=7     instr='B 0xA R0'  regs=[R1=12, R2=8, R3=12]
+R0: 4 = 12-8
+  TRACE: cycle=   8  PC=8     instr='- R3 R2'  regs=[R0=4, R1=12, R2=8, R3=12]
+R3: 4
+  TRACE: cycle=   9  PC=9     instr='M R3 R0'  regs=[R0=4, R1=12, R2=8, R3=4]
+Jump to 5
+  TRACE: cycle=  10  PC=5     instr='J 0x5 R0'  regs=[R0=4, R1=12, R2=8, R3=4]
+CMP 4 vs 8 → R0: 1
+  TRACE: cycle=  11  PC=6     instr='C R3 R2'  regs=[R0=1, R1=12, R2=8, R3=4]
+Branch taken → 10
+  TRACE: cycle=  12  PC=10    instr='B 0xA R0'  regs=[R0=1, R1=12, R2=8, R3=4]
+R1: 8
+  TRACE: cycle=  13  PC=11    instr='M R1 R2'  regs=[R0=1, R1=8, R2=8, R3=4]
+R2: 4
+  TRACE: cycle=  14  PC=12    instr='M R2 R3'  regs=[R0=1, R1=8, R2=4, R3=4]
+Jump to 2
+  TRACE: cycle=  15  PC=2     instr='J 0x2 R0'  regs=[R0=1, R1=8, R2=4, R3=4]
+CMP 4 vs 1 → R0: 0
+  TRACE: cycle=  16  PC=3     instr='C R2 0x1'  regs=[R1=8, R2=4, R3=4]
+Branch not taken
+  TRACE: cycle=  17  PC=4     instr='B 0xD R0'  regs=[R1=8, R2=4, R3=4]
+R3: 8
+  TRACE: cycle=  18  PC=5     instr='M R3 R1'  regs=[R1=8, R2=4, R3=8]
+CMP 8 vs 4 → R0: 0
+  TRACE: cycle=  19  PC=6     instr='C R3 R2'  regs=[R1=8, R2=4, R3=8]
+Branch not taken
+  TRACE: cycle=  20  PC=7     instr='B 0xA R0'  regs=[R1=8, R2=4, R3=8]
+R0: 4 = 8-4
+  TRACE: cycle=  21  PC=8     instr='- R3 R2'  regs=[R0=4, R1=8, R2=4, R3=8]
+R3: 4
+  TRACE: cycle=  22  PC=9     instr='M R3 R0'  regs=[R0=4, R1=8, R2=4, R3=4]
+Jump to 5
+  TRACE: cycle=  23  PC=5     instr='J 0x5 R0'  regs=[R0=4, R1=8, R2=4, R3=4]
+CMP 4 vs 4 → R0: 0
+  TRACE: cycle=  24  PC=6     instr='C R3 R2'  regs=[R1=8, R2=4, R3=4]
+Branch not taken
+  TRACE: cycle=  25  PC=7     instr='B 0xA R0'  regs=[R1=8, R2=4, R3=4]
+R0: 0 = 4-4
+  TRACE: cycle=  26  PC=8     instr='- R3 R2'  regs=[R1=8, R2=4, R3=4]
+R3: 0
+  TRACE: cycle=  27  PC=9     instr='M R3 R0'  regs=[R1=8, R2=4]
+Jump to 5
+  TRACE: cycle=  28  PC=5     instr='J 0x5 R0'  regs=[R1=8, R2=4]
+CMP 0 vs 4 → R0: 1
+  TRACE: cycle=  29  PC=6     instr='C R3 R2'  regs=[R0=1, R1=8, R2=4]
+Branch taken → 10
+  TRACE: cycle=  30  PC=10    instr='B 0xA R0'  regs=[R0=1, R1=8, R2=4]
+R1: 4
+  TRACE: cycle=  31  PC=11    instr='M R1 R2'  regs=[R0=1, R1=4, R2=4]
+R2: 0
+  TRACE: cycle=  32  PC=12    instr='M R2 R3'  regs=[R0=1, R1=4]
+Jump to 2
+  TRACE: cycle=  33  PC=2     instr='J 0x2 R0'  regs=[R0=1, R1=4]
+CMP 0 vs 1 → R0: 1
+  TRACE: cycle=  34  PC=3     instr='C R2 0x1'  regs=[R0=1, R1=4]
+Branch taken → 13
+  TRACE: cycle=  35  PC=13    instr='B 0xD R0'  regs=[R0=1, R1=4]
+HALT
